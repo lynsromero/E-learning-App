@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\AdminController;
+use App\Http\Controllers\backend\InstructorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,18 @@ Route::middleware(['auth', 'verified', 'role:admin'])
         Route::post('logout' , [AdminController::class, 'logout'])->name('logout');
     });
 
+
+
+// Instructor Login
+Route::get('/instructor/login' , [InstructorController::class , 'login'])->name('instructor.login');
+
+Route::middleware(['auth', 'verified', 'role:instructor'])
+    ->prefix('instructor')
+    ->name('instructor.')
+    ->group(function () {
+        Route::get('dashboard', [InstructorController::class, 'dashboard'])->name('dashboard');
+        Route::post('logout' , [InstructorController::class, 'logout'])->name('logout'); 
+    });
 
 
 

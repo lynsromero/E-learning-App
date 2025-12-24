@@ -21,16 +21,21 @@ class User extends Authenticatable
 
 
     /**helper methods for checking */
+public function isAdmin()
+{
+    return $this->role === 'admin';
+}
 
-    public function isAdmin(){
-        return $this->role === 'admin';
-    }
-    public function isInstructor(){
-        return $this->role === 'instructor';
-    }
-    public function isUser(){
-        return $this->role === 'user';
-    }
+public function isInstructor()
+{
+    return $this->role === 'instructor';
+}
+
+public function isUser()
+{
+    return $this->role === 'user';
+}
+
 
 
 
