@@ -19,6 +19,9 @@ class User extends Authenticatable
      */
     protected $guarded = [];
 
+protected $fillable = [
+    'name', 'email', 'phone', 'address', 'bio', 'city', 'country'
+];
 
     /**helper methods for checking */
 public function isAdmin()

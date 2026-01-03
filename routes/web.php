@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\AdminController;
 use App\Http\Controllers\backend\InstructorController;
+use App\Http\Controllers\backend\InstructorProfileController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,12 @@ Route::middleware(['auth', 'verified', 'role:instructor'])
     ->group(function () {
         Route::get('dashboard', [InstructorController::class, 'dashboard'])->name('dashboard');
         Route::post('logout' , [InstructorController::class, 'logout'])->name('logout'); 
+
+        // Instructor Profile
+        Route::get('/profile', [InstructorProfileController::class, 'index'])->name('profile');
+        Route::post('/update', [InstructorProfileController::class, 'update'])->name('update');
+        Route::get('/settings', [InstructorProfileController::class, 'settings'])->name('settings');
+
     });
 
 
