@@ -10,22 +10,13 @@
           <ol class="breadcrumb mb-0 p-0">
             <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">User Profilep</li>
+            <li class="breadcrumb-item active" aria-current="page">User Profile</li>
           </ol>
         </nav>
       </div>
       <div class="ms-auto">
         <div class="btn-group">
-          <button type="button" class="btn btn-primary">Settings</button>
-          <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
-            data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
-          </button>
-          <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a class="dropdown-item"
-              href="javascript:;">Action</a>
-            <a class="dropdown-item" href="javascript:;">Another action</a>
-            <a class="dropdown-item" href="javascript:;">Something else here</a>
-            <div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated link</a>
-          </div>
+          <a href="{{ route('instructor.settings') }}" class="btn btn-primary">Settings</a>          
         </div>
       </div>
     </div>
@@ -39,7 +30,7 @@
           <div class="col-lg-8">
             <div class="card">
 
-              <form action="{{ route('instructor.update') }}" method="POST">
+              <form action="{{ route('instructor.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                   <div class="row mb-3">
@@ -120,7 +111,7 @@
                       <h6 class="mb-0">Image</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input type="file" class="form-control" id="photo" name="photo" />
+                      <input type="file" class="form-control" id="photo" name="photo"/>
                     </div>
                   </div>
                   <div class="row">

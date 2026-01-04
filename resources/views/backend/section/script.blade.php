@@ -31,5 +31,22 @@
     });
   });
 </script>
+
+
+<script>
+  $(document).ready(function () {
+    $('#photo').on('change', function (event) {
+      const [file] = event.target.files;
+
+      if (file) {
+        $('#photoPreview')
+          .attr('src', URL.createObjectURL(file))
+          .css('display', 'block');
+      }
+    });
+  });
+</script>
+
+
 <!--app JS-->
 <script src="{{ asset('backend/assets/js/app.js') }}"></script>

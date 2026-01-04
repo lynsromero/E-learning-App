@@ -19,6 +19,21 @@ class InstructorProfileController extends Controller
     public function update(Request $request){
 
 
+
+        $photo = $request->file('photo');
+        if ($photo){
+
+            if(Auth::user()->photo){
+                unlink((Auth::user()->photo));
+            }
+
+
+            $photo_name = time() . rand(10000 , 200000) . $photo->getClientOriginalName();
+            $photo->storeAs('instructors/photos' , $photo_name , 'public');
+            $photo_name = 'storage/instructors/photos/' . $photo_name;
+
+        }
+
         $user = Auth::user();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
@@ -27,6 +42,7 @@ class InstructorProfileController extends Controller
         $user->bio = $request->input('bio');
         $user->city = $request->input('city');
         $user->country = $request->input('country');
+        $user->photo = isset($photo_name) ?$photo_name : null;
         $user->save();
 
 
