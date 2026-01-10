@@ -40,7 +40,7 @@ Route::middleware(['auth', 'verified', 'role:instructor'])
 
         // Instructor Profile
         Route::get('/profile', [InstructorProfileController::class, 'index'])->name('profile');
-        Route::post('/update', [InstructorProfileController::class, 'update'])->name('update');
+        Route::post('/update', [InstructorProfileController::class, 'store'])->name('update');
         Route::get('/settings', [InstructorProfileController::class, 'settings'])->name('settings');
 
     });

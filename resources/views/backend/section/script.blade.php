@@ -15,6 +15,11 @@
 <script src="{{ asset('backend/assets/plugins/notifications/js/notifications.min.js') }}"></script>
 <script src="{{ asset('backend/assets/js/index3.js') }}"></script>
 <!--Password show & hide js -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 <script>
   $(document).ready(function () {
     $("#show_hide_password a").on('click', function (event) {
@@ -50,3 +55,28 @@
 
 <!--app JS-->
 <script src="{{ asset('backend/assets/js/app.js') }}"></script>
+
+
+<script>
+  @if (session('success'))
+  Swal.fire({
+    toast:true,
+    position:'top-end',
+    icon: 'success',
+    title: '{{ session('success') }}',
+    showConfirmButton: false,
+    timer: 3000,
+    background: '#fff',
+  });
+  @elseif (session('error'))
+  Swal.fire({
+    toast:true,
+    position:'top-end',
+    icon: 'error',
+    title: '{{ session('error') }}',
+    showConfirmButton: false,
+    timer: 3000,
+    background: '#fff',
+  });    
+  @endif
+</script>

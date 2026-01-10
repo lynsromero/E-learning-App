@@ -24,3 +24,4 @@
   <link rel="stylesheet" href="{{ asset('backend/assets/css/dark-theme.css') }}" />
   <link rel="stylesheet" href="{{ asset('backend/assets/css/semi-dark.css') }}" />
   <link rel="stylesheet" href="{{ asset('backend/assets/css/header-colors.css') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js">

@@ -16,7 +16,7 @@
       </div>
       <div class="ms-auto">
         <div class="btn-group">
-          <a href="{{ route('instructor.settings') }}" class="btn btn-primary">Settings</a>          
+          <a href="{{ route('instructor.settings') }}" class="btn btn-primary">Settings</a>
         </div>
       </div>
     </div>
@@ -33,87 +33,138 @@
               <form action="{{ route('instructor.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
+
                   <div class="row mb-3">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Full Name</h6>
+                      <h6 class="mb-0">Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input type="text" name="name" class="form-control" value="{{ auth()->user()->name }}" />
+                      <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                        value="{{ auth()->user()->name }}" />
+
+                      @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
                     </div>
                   </div>
+
                   <div class="row mb-3">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input type="email" name="email" class="form-control" value="{{ auth()->user()->email }}" />
+                      <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                        value="{{ auth()->user()->email }}" />
+                      @error('email')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
                     </div>
                   </div>
+
                   <div class="row mb-3">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Phone</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input type="text" name="phone" class="form-control" value="{{ auth()->user()->phone }}" />
+                      <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror"
+                        value="{{ auth()->user()->phone }}" />
+                      @error('phone')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
                     </div>
                   </div>
+
+                  <div class="row mb-3">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Gender</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <select class="form-select" name="gender">
+                        <option value="male" {{ auth()->user()->gender === 'male' ? 'selected' : '' }}>Male</option>
+                        <option value="female" {{ auth()->user()->gender === 'female' ? 'selected' : '' }}>Female</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Experience</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <input type="text" name="experience" class="form-control @error('experience') is-invalid @enderror"
+                        value="{{ auth()->user()->experience }}"
+                        placeholder="Example : Web Developer, Designer, and Teacher" />
+                      @error('experience')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
+                    </div>
+                  </div>
+
                   <div class="row mb-3">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Address</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input type="text" name="address" class="form-control" value="{{ auth()->user()->address }}" />
+                      <input type="text" name="address" class="form-control @error('address') is-invalid @enderror"
+                        value="{{ auth()->user()->address }}" />
+                      @error('address')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
                     </div>
                   </div>
-                  <div class="row mb-3">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Bio</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      <input type="text" name="bio" class="form-control" value="{{ auth()->user()->bio }}" />
-                    </div>
-                  </div>
+
                   <div class="row mb-3">
                     <div class="col-sm-3">
                       <h6 class="mb-0">City</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input type="text" name="city" class="form-control" value="{{ auth()->user()->city }}" />
+                      <input type="text" name="city" class="form-control @error('city') is-invalid @enderror"
+                        value="{{ auth()->user()->city }}" />
+                      @error('city')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
                     </div>
                   </div>
+
                   <div class="row mb-3">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Country</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input type="text" name="country" class="form-control" value="{{ auth()->user()->country }}" />
+                      <input type="text" name="country" class="form-control @error('country') is-invalid @enderror"
+                        value="{{ auth()->user()->country }}" />
+                      @error('country')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
                     </div>
                   </div>
+
                   <div class="row mb-3">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Gender</h6>
+                      <h6 class="mb-0">Bio</h6>
                     </div>
-
                     <div class="col-sm-9 text-secondary">
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" {{ auth()->user()->gender === 'male' ? 'checked' : '' }}>
-                        <label class="form-check-label" for="genderMale">Male</label>
-                      </div>
-
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female" {{ auth()->user()->gender === 'female' ? 'checked' : '' }}>
-                        <label class="form-check-label" for="genderFemale">Female</label>
-                      </div>
+                      <textarea placeholder="Enter your bio" class="form-control @error('bio') is-invalid @enderror"
+                        name="bio" rows="6">{{ auth()->user()->bio }}</textarea>
+                      @error('bio')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
                     </div>
                   </div>
+
                   <div class="row mb-3">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Image</h6>
+                      <h6 class="mb-0">Profile Image</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input type="file" class="form-control" id="photo" name="photo"/>
+                      <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
+                        name="photo" />
+                      @error('photo')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
                     </div>
                   </div>
+
                   <div class="row">
                     <div class="col-sm-3"></div>
                     <div class="col-sm-9 text-secondary">

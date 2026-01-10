@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\InstructorProfileRequest;
+use App\Services\ProfileService;
 
 class InstructorProfileController extends Controller
 {
+    protected $profileService;
+
+    public function __construct(ProfileService $profileService){
+        $this->profileService = $profileService;
+    }
     public function index(){
         return view('backend.instructor.profile.index');
     }
@@ -16,37 +21,9 @@ class InstructorProfileController extends Controller
         return view('backend.instructor.profile.settings');
     }
 
-    public function update(Request $request){
+    public function store(InstructorProfileRequest $request){
+        $this->profileService->saveProfile($request->all(), $request->file('photo'));
 
-
-
-        $photo = $request->file('photo');
-        if ($photo){
-
-            if(Auth::user()->photo){
-                unlink((Auth::user()->photo));
-            }
-
-
-            $photo_name = time() . rand(10000 , 200000) . $photo->getClientOriginalName();
-            $photo->storeAs('instructors/photos' , $photo_name , 'public');
-            $photo_name = 'storage/instructors/photos/' . $photo_name;
-
-        }
-
-        $user = Auth::user();
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->phone = $request->input('phone');
-        $user->address = $request->input('address');
-        $user->bio = $request->input('bio');
-        $user->city = $request->input('city');
-        $user->country = $request->input('country');
-        $user->photo = isset($photo_name) ?$photo_name : null;
-        $user->save();
-
-
-
-        return back()->with('success', 'Profile updated successfully');
+        return redirect()->back()->with('success' , 'Profile Updated Successfully');
     }
 }
